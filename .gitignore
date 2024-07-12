@@ -1,0 +1,7 @@
+/.idea/
+/target/
+/src/main/java/org/voidzero/influx/cli/Main.java
+/pom.xml.versionsBackup
+/examples/chaining/target/
+/examples/hello/target/
+/src/main/java/Main*.java
