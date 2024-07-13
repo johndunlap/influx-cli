@@ -60,7 +60,7 @@ public class SubCommandTest {
 
         String expected = "The following options are accepted: \n"
                 + "commands:\n"
-                + "\tsub\n"
+                + "\tsub\t\t(description unavailable)\n"
                 + "\n"
                 + "  -f  --first-name  Accepts a string value\n"
                 + "  -l  --last-name   Accepts a string value\n"
@@ -116,7 +116,7 @@ public class SubCommandTest {
 
         String expected = "The following options are accepted: \n"
                 + "commands:\n"
-                + "\tsomething\n"
+                + "\tsomething\t\t(description unavailable)\n"
                 + "\n"
                 + "  -f  --first-name  Accepts a string value\n"
                 + "  -l  --last-name   Accepts a string value\n"
