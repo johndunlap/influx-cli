@@ -5,3 +5,4 @@
 /examples/chaining/target/
 /examples/hello/target/
 /src/main/java/Main*.java
+/src/main/java/Example.java

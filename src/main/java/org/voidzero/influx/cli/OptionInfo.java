@@ -42,13 +42,15 @@ public class OptionInfo {
     private String description = "";
     private String category = "";
     private boolean required = false;
+    private boolean isCommand = false;
+    private String commandName = "";
 
     /**
      * Creates a new OptionInfo object from the given field.
      *
      * @param field The field to create the OptionInfo object from.
      */
-    public OptionInfo(Field field) {
+    public OptionInfo(final Field field) {
         if (field.isAnnotationPresent(Ignore.class)) {
             throw new RuntimeException("Cannot process ignored field");
         }
@@ -103,7 +105,12 @@ public class OptionInfo {
             Command command = field.getType().getAnnotation(Command.class);
 
             if (command != null) {
-                command.name();
+                commandName = command.name().isEmpty()
+                        ? Parser.camelCaseToHyphenCase(field.getName())
+                        : command.name();
+                isCommand = true;
+                category = "commands";
+                description = command.description();
             }
         }
     }
@@ -145,11 +152,29 @@ public class OptionInfo {
     }
 
     /**
-     * True if the option is required and false otherwise.
+     * Returns true if the option is required and false otherwise.
      *
      * @return True if the option is required and false otherwise.
      */
     public boolean isRequired() {
         return required;
+    }
+
+    /**
+     * Returns true if the option is a sub-command and false otherwise.
+     *
+     * @return True if the option is a sub-command and false otherwise.
+     */
+    public boolean isCommand() {
+        return isCommand;
+    }
+
+    /**
+     * If isCommand is true, this will return the name of the command. Null is returned otherwise.
+     *
+     * @return The name of the command or null
+     */
+    public String getCommandName() {
+        return commandName;
     }
 }

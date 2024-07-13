@@ -254,12 +254,18 @@ public class InfluxCli {
 
         sb.append(before);
 
+        List<OptionInfo> commandList = new ArrayList<>();
         Map<String, List<OptionInfo>> categorized = new HashMap<>();
         int longestLongName = 0;
 
         // Attempt to categorize the options
         Map<String, Boolean> categoryMap = new HashMap<>();
         for (OptionInfo optionInfo : extract(classType)) {
+            if (optionInfo.isCommand()) {
+                commandList.add(optionInfo);
+                continue;
+            }
+
             String category = optionInfo.getCategory();
 
             if (category.isEmpty()) {
@@ -285,6 +291,24 @@ public class InfluxCli {
             if (length > longestLongName) {
                 longestLongName = length;
             }
+        }
+
+        if (!commandList.isEmpty()) {
+            sb.append("\ncommands:");
+
+            // Emit the list of available sub-commands
+            for (OptionInfo optionInfo : commandList) {
+                sb.append("\n\t")
+                        .append(optionInfo.getCommandName());
+
+
+                if (!optionInfo.getDescription().isEmpty()) {
+                    sb.append("\t\t")
+                            .append(optionInfo.getDescription());
+                }
+            }
+
+            sb.append("\n");
         }
 
         LinkedList<String> categoryList = new LinkedList<>(categoryMap.keySet());

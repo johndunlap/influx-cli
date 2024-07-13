@@ -140,7 +140,7 @@ public class ParseContext<T> {
                         requiredFields.add(field);
                     }
 
-                    if (!namedOption.flag().equals("")) {
+                    if (!namedOption.flag().isEmpty()) {
                         if (!namedFields.containsKey(namedOption.flag())) {
                             namedFields.put(namedOption.flag(), field);
                         } else {

@@ -54,7 +54,7 @@ public @interface Command {
      *
      * @return A description of the context which can be displayed in help messages.
      */
-    String description() default "";
+    String description() default "(description unavailable)";
     /**
      * The text to display prior to the list of options.
      *
