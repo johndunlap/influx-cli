@@ -10,7 +10,7 @@ fi
 
 # Set the new version, build and deploy the artifacts
 mvn versions:set "-DnewVersion=${NEW_VERSION}"
-mvn clean deploy -P ossrh
+mvn clean deploy
 
 # Record the new version in version control
 git add -A

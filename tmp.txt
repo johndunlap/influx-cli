@@ -3,7 +3,7 @@
 [[1;34mINFO[m] Installing Central Publishing features
 [[1;34mINFO[m] 
 [[1;34mINFO[m] [1m----------------------< [0;36morg.voidzero:influx-cli[0;1m >-----------------------[m
-[[1;34mINFO[m] [1mBuilding influx-cli 0.9.1-SNAPSHOT[m
+[[1;34mINFO[m] [1mBuilding influx-cli 0.10.0[m
 [[1;34mINFO[m] [1m--------------------------------[ jar ]---------------------------------[m
 [[1;34mINFO[m] 
 [[1;34mINFO[m] [1m--- [0;32mmaven-help-plugin:3.4.1:effective-pom[m [1m(default-cli)[m @ [36minflux-cli[0;1m ---[m
@@ -19,14 +19,14 @@ Effective POMs, after inheritance, interpolation, and profiles are applied:
 [36m<!-- ====================================================================== -->[m
 [36m<!-- ====================================================================== -->[m
 [36m<!--                                                                        -->[m
-[36m<!-- Effective POM for project 'org.voidzero:influx-cli:jar:0.9.1-SNAPSHOT' -->[m
+[36m<!-- Effective POM for project 'org.voidzero:influx-cli:jar:0.10.0'         -->[m
 [36m<!--                                                                        -->[m
 [36m<!-- ====================================================================== -->[m
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.voidzero</groupId>
   <artifactId>influx-cli</artifactId>
-  <version>0.9.1-SNAPSHOT</version>
+  <version>0.10.0</version>
   <name>influx-cli</name>
   <description>Influx CLI is a Java library which allows sophisticated command line interfaces to be constructed, with minimal
         boilerplate, by using annotations to bind your command line interface to your data structure.</description>
@@ -56,13 +56,13 @@ Effective POMs, after inheritance, interpolation, and profiles are applied:
     <junit.version>4.13.2</junit.version>
     <license-maven-plugin.version>2.0.0</license-maven-plugin.version>
     <maven-checkstyle-plugin.version>3.2.1</maven-checkstyle-plugin.version>
+    <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
     <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
     <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
     <maven-release-plugin.version>2.5.1</maven-release-plugin.version>
     <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
     <maven-surefire-plugin.version>3.0.0-M9</maven-surefire-plugin.version>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.release>11</maven.compiler.release>
     <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
@@ -114,7 +114,7 @@ Effective POMs, after inheritance, interpolation, and profiles are applied:
       </testResource>
     </testResources>
     <directory>/home/personal/git/voidzero/influx-cli/target</directory>
-    <finalName>influx-cli-0.9.1-SNAPSHOT</finalName>
+    <finalName>influx-cli-0.10.0</finalName>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -272,6 +272,38 @@ Effective POMs, after inheritance, interpolation, and profiles are applied:
         </configuration>
       </plugin>
       <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <executions>
+          <execution>
+            <id>default-compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <configuration>
+              <release>11</release>
+              <failOnWarning>true</failOnWarning>
+            </configuration>
+          </execution>
+          <execution>
+            <id>default-testCompile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+            <configuration>
+              <release>11</release>
+              <failOnWarning>true</failOnWarning>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration>
+          <release>11</release>
+          <failOnWarning>true</failOnWarning>
+        </configuration>
+      </plugin>
+      <plugin>
         <artifactId>maven-clean-plugin</artifactId>
         <version>2.5</version>
         <executions>
@@ -313,26 +345,6 @@ Effective POMs, after inheritance, interpolation, and profiles are applied:
             <phase>package</phase>
             <goals>
               <goal>jar</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.1</version>
-        <executions>
-          <execution>
-            <id>default-compile</id>
-            <phase>compile</phase>
-            <goals>
-              <goal>compile</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>default-testCompile</id>
-            <phase>test-compile</phase>
-            <goals>
-              <goal>testCompile</goal>
             </goals>
           </execution>
         </executions>
@@ -412,6 +424,6 @@ Effective POMs, after inheritance, interpolation, and profiles are applied:
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m
 [[1;34mINFO[m] [1;32mBUILD SUCCESS[m
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m
-[[1;34mINFO[m] Total time:  0.512 s
-[[1;34mINFO[m] Finished at: 2024-07-11T15:38:33-04:00
+[[1;34mINFO[m] Total time:  0.627 s
+[[1;34mINFO[m] Finished at: 2024-07-13T18:50:31-04:00
 [[1;34mINFO[m] [1m------------------------------------------------------------------------[m
