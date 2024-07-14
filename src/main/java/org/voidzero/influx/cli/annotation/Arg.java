@@ -125,4 +125,12 @@ public @interface Arg {
      * @return The class of the ValueParser to use.
      */
     Class<? extends TypeConverter<?>> converter() default StringValueParser.class;
+
+    /**
+     * This is the variable name which should be resolved to a value if one isn't provided by the user. When specified,
+     * the resolution order is <b>System.getenv(String)</b> first and then <b>System.getProperty(String)</b> second.
+     *
+     * @return the variable name which should be resolved to a value if one isn't provided by the user
+     */
+    String environmentVariable() default "";
 }

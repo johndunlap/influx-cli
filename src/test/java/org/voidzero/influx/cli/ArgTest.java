@@ -390,6 +390,21 @@ public class ArgTest {
         assertEquals("three", config.getStringList().get(2));
     }
 
+    @Test
+    public void testSystemPropertyValueResolution() throws HelpException, ParseException {
+        String[] args = {};
+        System.setProperty("BYTE_VALUE", "1");
+        System.setProperty("SHORT_VALUE", "2");
+        System.setProperty("INTEGER_VALUE", "3");
+        System.setProperty("LONG_VALUE", "4");
+
+        HelpConfig config = (HelpConfig) new InfluxCli().bind(HelpConfig.class, args);
+        assertEquals(1, config.getByteValue().intValue());
+        assertEquals(2, config.getShortValue().intValue());
+        assertEquals(3, config.getIntegerValue().intValue());
+        assertEquals(4, config.getLongValue().intValue());
+    }
+
     @Command(
             openingText = "This is the opening description",
             closingText = "This is the closing description"
@@ -400,7 +415,8 @@ public class ArgTest {
                 flag = "long-value",
                 required = true,
                 description = "A long value",
-                category = "Type tests"
+                category = "Type tests",
+                environmentVariable = "LONG_VALUE"
         )
         private Long longValue;
         @Arg(
@@ -408,7 +424,8 @@ public class ArgTest {
                 flag = "integer-value",
                 required = true,
                 description = "A integer value",
-                category = "Type tests"
+                category = "Type tests",
+                environmentVariable = "INTEGER_VALUE"
         )
         private Integer integerValue;
         @Arg(
@@ -416,7 +433,8 @@ public class ArgTest {
                 flag = "short-value",
                 required = true,
                 description = "A long value",
-                category = "Type tests"
+                category = "Type tests",
+                environmentVariable = "SHORT_VALUE"
         )
         private Short shortValue;
         @Arg(
@@ -424,7 +442,8 @@ public class ArgTest {
                 flag = "byte-value",
                 required = true,
                 description = "A byte value",
-                category = "Type tests"
+                category = "Type tests",
+                environmentVariable = "BYTE_VALUE"
         )
         private Byte byteValue;
         @Arg(

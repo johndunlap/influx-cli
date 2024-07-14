@@ -254,33 +254,31 @@ public class ReflectionUtil {
      * @param fieldType The type of the object to be returned
      * @param value The string value to be parsed
      * @return The parsed value
-     * @param <T> The type of the object to be returned
      * @throws ParseException Thrown if the value cannot be parsed into the given type
      */
-    @SuppressWarnings("unchecked")
-    public static <T> T parse(Class<T> fieldType, String value) throws ParseException {
+    public static Object parse(Class<?> fieldType, String value) throws ParseException {
         if (fieldType == null) {
             throw new ParseException("Field type cannot be null");
         }
 
         if (fieldType.equals(String.class)) {
-            return (T) value;
+            return value;
         } else if (isInteger(fieldType)) {
-            return (T) Integer.valueOf(Integer.parseInt(value));
+            return Integer.parseInt(value);
         } else if (isShort(fieldType)) {
-            return (T) Short.valueOf(Short.parseShort(value));
+            return Short.parseShort(value);
         } else if (isLong(fieldType)) {
-            return (T) Long.valueOf(Long.parseLong(value));
+            return Long.parseLong(value);
         } else if (isFloat(fieldType)) {
-            return (T) Float.valueOf(Float.parseFloat(value));
+            return Float.parseFloat(value);
         } else if (isDouble(fieldType)) {
-            return (T) Double.valueOf(Double.parseDouble(value));
+            return Double.parseDouble(value);
         } else if (isByte(fieldType)) {
-            return (T) Byte.valueOf(Byte.parseByte(value));
+            return Byte.parseByte(value);
         } else if (fieldType.equals(BigInteger.class)) {
-            return (T) new BigInteger(value);
+            return new BigInteger(value);
         } else if (fieldType.equals(BigDecimal.class)) {
-            return (T) new BigDecimal(value);
+            return new BigDecimal(value);
         } else if (isCharacter(fieldType)) {
             // Throw an exception if the wrong number of characters are passed
             if (value == null || value.length() != 1) {
@@ -290,12 +288,12 @@ public class ReflectionUtil {
                 );
             }
 
-            return (T) Character.valueOf(value.charAt(0));
+            return value.charAt(0);
         } else if (isBoolean(fieldType)) {
             if (value == null) {
-                return (T) Boolean.valueOf(false);
+                return Boolean.FALSE;
             } else {
-                return (T) Boolean.valueOf(Boolean.parseBoolean(value));
+                return Boolean.parseBoolean(value);
             }
         }
 

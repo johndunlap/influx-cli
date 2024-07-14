@@ -101,6 +101,26 @@ public class ParseContext<T> {
         // Attempt to construct the instance which will be returned
         try {
             this.instance = classType.getDeclaredConstructor().newInstance();
+
+            // Attempt to populate fields with default values using environment and system variables. These values can
+            // be overridden by users on the command line. It's simpler to do this on the front end than it is to do it
+            // during parsing
+            for (Field field : classType.getDeclaredFields()) {
+                Arg arg = field.getDeclaredAnnotation(Arg.class);
+
+                if (arg != null && !arg.environmentVariable().isEmpty()) {
+                    String value = System.getenv(arg.environmentVariable());
+
+                    if (value == null) {
+                        value = System.getProperty(arg.environmentVariable());
+                    }
+
+                    if (value != null) {
+                        ReflectionUtil.setFieldValue(field, this.instance,
+                                ReflectionUtil.parse(field.getType(), value));
+                    }
+                }
+            }
         } catch (Exception e) {
             String message = format("Class %s must have a public no-arg constructor", classType.getCanonicalName());
             throw new MissingNoArgConstructorException(message, e, classType);
