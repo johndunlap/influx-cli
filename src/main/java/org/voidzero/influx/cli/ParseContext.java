@@ -110,9 +110,11 @@ public class ParseContext<T> {
 
                 if (arg != null && !arg.environmentVariable().isEmpty()) {
                     String value = System.getenv(arg.environmentVariable());
+                    String tmp = System.getProperty(arg.environmentVariable());
 
-                    if (value == null) {
-                        value = System.getProperty(arg.environmentVariable());
+                    // Allow system properties to override environment variables
+                    if (tmp != null && !tmp.isEmpty()) {
+                        value = tmp;
                     }
 
                     if (value != null) {
