@@ -33,7 +33,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Test dependency versions -->
-        <junit.version>4.13.2</junit.version>
+        <junit.version>4.12</junit.version>
 
         <!-- Plugin versions -->
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
