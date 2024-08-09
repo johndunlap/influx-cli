@@ -62,8 +62,8 @@ public class SubCommandTest {
                 + "commands:\n"
                 + "\tsub\t\t(description unavailable)\n"
                 + "\n"
-                + "  -f  --first-name  Accepts a string value\n"
-                + "  -l  --last-name   Accepts a string value\n"
+                + "  -f, --first-name  Accepts a string value\n"
+                + "  -l, --last-name   Accepts a string value\n"
                 + "      --test        Accepts a string value\n";
 
         assertEquals(expected, outputStream.toString());
@@ -90,8 +90,8 @@ public class SubCommandTest {
                 + "commands:\n"
                 + "\tsub\t\tthis is the description\n"
                 + "\n"
-                + "  -f  --first-name  Accepts a string value\n"
-                + "  -l  --last-name   Accepts a string value\n"
+                + "  -f, --first-name  Accepts a string value\n"
+                + "  -l, --last-name   Accepts a string value\n"
                 + "      --test        Accepts a string value\n";
 
         assertEquals(expected, outputStream.toString());
@@ -118,8 +118,8 @@ public class SubCommandTest {
                 + "commands:\n"
                 + "\tsomething\t\t(description unavailable)\n"
                 + "\n"
-                + "  -f  --first-name  Accepts a string value\n"
-                + "  -l  --last-name   Accepts a string value\n"
+                + "  -f, --first-name  Accepts a string value\n"
+                + "  -l, --last-name   Accepts a string value\n"
                 + "      --test        Accepts a string value\n";
 
         assertEquals(expected, outputStream.toString());
@@ -146,8 +146,8 @@ public class SubCommandTest {
                 + "commands:\n"
                 + "\tsomething\t\tcommand description\n"
                 + "\n"
-                + "  -f  --first-name  Accepts a string value\n"
-                + "  -l  --last-name   Accepts a string value\n"
+                + "  -f, --first-name  Accepts a string value\n"
+                + "  -l, --last-name   Accepts a string value\n"
                 + "      --test        Accepts a string value\n";
 
         assertEquals(expected, outputStream.toString());
@@ -175,8 +175,8 @@ public class SubCommandTest {
                 + "\tsomething\t\tcommand description\n"
                 + "\tsomething\t\tcommand description\n"
                 + "\n"
-                + "  -f  --first-name  Accepts a string value\n"
-                + "  -l  --last-name   Accepts a string value\n"
+                + "  -f, --first-name  Accepts a string value\n"
+                + "  -l, --last-name   Accepts a string value\n"
                 + "      --test        Accepts a string value\n";
 
         assertEquals(expected, outputStream.toString());

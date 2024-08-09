@@ -308,27 +308,21 @@ public class ArgTest {
     @Test
     public void testHelpMethod() {
         String expectedOutput = "This is the opening description\n"
-                + "  -B  --boolean-value  A boolean value\n"
-                + "  -C  --char-value     A single character\n"
+                + "  -B, --boolean-value  A boolean value\n"
+                + "  -C, --char-value     A single character\n"
                 + "\n"
                 + "Type tests:\n"
-                + "  -L  --long-value     A long value (required)\n"
-                + "  -I  --integer-value  A integer value (required)\n"
-                + "  -s  --short-value    A long value (required)\n"
-                + "  -b  --byte-value     A byte value (required)\n"
-                + "  -D  --double-value   A double value\n"
-                + "  -F  --float-value    A float value\n"
-                + "  -S  --string-value   A string value\n"
-                + "  -l  --string-list    A list of strings\n"
-                // TODO: Uncomment this when a help category is automatically generated
-                /*
-                + "\n"
-                + "Help:\n"
-                + "  -H  --help           Displays this help message\n"
-                */
+                + "* -L, --long-value     A long value\n"
+                + "* -I, --integer-value  A integer value\n"
+                + "* -s, --short-value    A long value\n"
+                + "* -b, --byte-value     A byte value\n"
+                + "  -D, --double-value   A double value\n"
+                + "  -F, --float-value    A float value\n"
+                + "  -S, --string-value   A string value\n"
+                + "  -l, --string-list    A list of strings\n"
                 + "This is the closing description";
 
-        String actual = new InfluxCli().help(HelpConfig.class);
+        String actual = InfluxCli.help(HelpConfig.class);
         assertEquals(expectedOutput, actual);
     }
 

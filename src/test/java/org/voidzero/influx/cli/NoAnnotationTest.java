@@ -83,7 +83,7 @@ public class NoAnnotationTest {
     @Test
     public void testHalfAnnotatedHalfNotAnnotated() {
         String expected = "The following options are accepted: \n"
-                + "  -f  --first   Accepts a string value\n"
+                + "  -f, --first   Accepts a string value\n"
                 + "      --second  Accepts a string value";
         String actual = InfluxCli.help(HalfAnnotatedHalfNotConfig.class);
         assertNotNull(actual);

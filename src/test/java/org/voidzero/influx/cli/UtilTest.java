@@ -37,6 +37,13 @@ import org.junit.Test;
  */
 public class UtilTest {
 
+    public static final String LOREM_IPSUM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec lacus"
+            + " eu lectus ultricies vehicula. Nullam faucibus nibh eu neque gravida, ac cursus leo posuere. Nam"
+            + " imperdiet consequat nisi, eu luctus sem hendrerit eget. Cras ornare sagittis sagittis. Suspendisse at"
+            + " tellus tellus. Cras maximus efficitur tincidunt. Nunc tristique hendrerit lorem porttitor vulputate."
+            + " Fusce condimentum dui eget justo interdum finibus. Vestibulum tincidunt sit amet justo vitae"
+            + " pellentesque. Sed accumsan eu nunc id mattis. In nec nisi venenatis ex porttitor sagittis eu sed nisi.";
+
     @Test
     public void testCamelCaseToHyphenCaseMethod() {
         assertEquals("thisIsATest", Parser.hyphenCaseToCamelCase("this-is-a-test"));
@@ -50,5 +57,41 @@ public class UtilTest {
     @Test
     public void testCamelCaseToHyphenCaseWithSingleWord() {
         assertEquals("second", Parser.camelCaseToHyphenCase("second"));
+    }
+
+    @Test
+    public void testLineWrapMethodWith80MaxLength() {
+        String actual = Parser.wordWrap(LOREM_IPSUM, 80);
+        String expected = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec lacus eu\n"
+                + "lectus ultricies vehicula. Nullam faucibus nibh eu neque gravida, ac cursus leo\n"
+                + "posuere. Nam imperdiet consequat nisi, eu luctus sem hendrerit eget. Cras\n"
+                + "ornare sagittis sagittis. Suspendisse at tellus tellus. Cras maximus efficitur\n"
+                + "tincidunt. Nunc tristique hendrerit lorem porttitor vulputate. Fusce\n"
+                + "condimentum dui eget justo interdum finibus. Vestibulum tincidunt sit amet\n"
+                + "justo vitae pellentesque. Sed accumsan eu nunc id mattis. In nec nisi venenatis\n"
+                + "ex porttitor sagittis eu sed nisi.";
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testLineWrapMethodWith40MaxLength() {
+        String actual = Parser.wordWrap(LOREM_IPSUM, 40);
+        String expected = "Lorem ipsum dolor sit amet, consectetur\n"
+                + "adipiscing elit. Nunc nec lacus eu\n"
+                + "lectus ultricies vehicula. Nullam\n"
+                + "faucibus nibh eu neque gravida, ac\n"
+                + "cursus leo posuere. Nam imperdiet\n"
+                + "consequat nisi, eu luctus sem hendrerit\n"
+                + "eget. Cras ornare sagittis sagittis.\n"
+                + "Suspendisse at tellus tellus. Cras\n"
+                + "maximus efficitur tincidunt. Nunc\n"
+                + "tristique hendrerit lorem porttitor\n"
+                + "vulputate. Fusce condimentum dui eget\n"
+                + "justo interdum finibus. Vestibulum\n"
+                + "tincidunt sit amet justo vitae\n"
+                + "pellentesque. Sed accumsan eu nunc id\n"
+                + "mattis. In nec nisi venenatis ex\n"
+                + "porttitor sagittis eu sed nisi.";
+        assertEquals(expected, actual);
     }
 }

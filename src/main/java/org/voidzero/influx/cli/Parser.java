@@ -209,4 +209,34 @@ public enum Parser {
 
         return sb.toString();
     }
+
+    /**
+     * Accepts a string and word wraps it on a specified character boundary.
+     *
+     * @param text The text which needs to be word wrapped.
+     * @param boundary The maximum length of each line
+     * @return The word wrapped string
+     */
+    public static String wordWrap(final String text, final int boundary) {
+        return wordWrap(text, boundary, "");
+    }
+
+    /**
+     * Accepts a string and word wraps it on a specified character boundary.
+     *
+     * @param text The text which needs to be word wrapped.
+     * @param boundary The maximum length of each line
+     * @param padding String which should be pre-pended to the front of each new line which is created
+     * @return The word wrapped string
+     */
+    public static String wordWrap(final String text, final int boundary, final String padding) {
+        int maxLength = boundary - padding.length() - 1;
+
+        if (text.length() <= maxLength) {
+            return padding + text;
+        }
+
+        int index = text.lastIndexOf(' ', maxLength);
+        return padding + text.substring(0, index) + '\n' + wordWrap(text.substring(index + 1), boundary, padding);
+    }
 }

@@ -49,6 +49,11 @@ import org.voidzero.influx.cli.exception.ParseException;
 public class InfluxCli {
 
     /**
+     * Descriptions for named options wrap around to the next line after this threshold.
+     */
+    public static final int WORDWRAP_THRESHOLD = 80;
+
+    /**
      * This allows unit tests to override the exit mechanism.
      */
     private ExitMechanism exitMechanism = System::exit;
@@ -319,6 +324,7 @@ public class InfluxCli {
         categoryList.addFirst("default");
 
         String longestWhitespace = String.join("", Collections.nCopies(longestLongName, " "));
+        String leftPadding = " ".repeat(10 + longestLongName);
 
         for (String category : categoryList) {
             List<OptionInfo> namedOptionList = categorized.get(category);
@@ -328,28 +334,49 @@ public class InfluxCli {
             }
 
             for (OptionInfo nameOption : namedOptionList) {
-                sb.append("\n  ");
+                sb.append("\n");
+                StringBuilder lineBuilder = new StringBuilder();
+
+                if (nameOption.isRequired()) {
+                    lineBuilder.append("* ");
+                } else {
+                    lineBuilder.append("  ");
+                }
 
                 if (nameOption.getCode() != ' ') {
-                    sb.append('-').append(nameOption.getCode());
+                    lineBuilder.append('-').append(nameOption.getCode());
                 } else {
-                    sb.append("  ");
+                    lineBuilder.append("  ");
                 }
 
                 String longName = nameOption.getFlag();
 
                 // Pad the end of the long name
                 if (longName.isEmpty()) {
-                    sb.append(longestWhitespace);
+                    lineBuilder.append(longestWhitespace);
                 } else {
-                    sb.append("  --").append(longName)
-                            .append(longestWhitespace, 0, longestLongName - longName.length());
-                }
+                    if (nameOption.getCode() != ' ') {
+                        lineBuilder.append(',');
+                    } else {
+                        lineBuilder.append(' ');
+                    }
 
-                sb.append("  ").append(nameOption.getDescription());
+                    String currentLine = lineBuilder.append(" --").append(longName)
+                            .append(longestWhitespace, 0, longestLongName - longName.length())
+                            .append("  ")
+                            .append(nameOption.getDescription())
+                            .toString();
 
-                if (nameOption.isRequired()) {
-                    sb.append(" (required)");
+                    if (currentLine.length() > WORDWRAP_THRESHOLD) {
+                        int lastSpaceIndex = currentLine.lastIndexOf(' ', WORDWRAP_THRESHOLD - 1);
+                        sb.append(currentLine, 0, lastSpaceIndex)
+                                .append('\n');
+                        String remainder = currentLine.substring(lastSpaceIndex + 1);
+                        sb.append(Parser.wordWrap(remainder, WORDWRAP_THRESHOLD, leftPadding))
+                                .append('\n');
+                    } else {
+                        sb.append(currentLine);
+                    }
                 }
             }
         }

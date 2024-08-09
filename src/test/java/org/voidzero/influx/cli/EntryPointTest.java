@@ -28,6 +28,7 @@ package org.voidzero.influx.cli;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.voidzero.influx.cli.UtilTest.LOREM_IPSUM;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -94,7 +95,7 @@ public class EntryPointTest {
                 .bindOrExit(SimpleConfig.class, args);
 
         String expected = "The following options are accepted: \n"
-                + "  -f  --first    Accepts a string value (required)\n"
+                + "* -f, --first    Accepts a string value\n"
                 + "      --second   Accepts a number\n"
                 + "      --invoked  Boolean flag which requires no argument\n";
 
@@ -102,6 +103,47 @@ public class EntryPointTest {
                 expected,
                 outputStream.toString()
         );
+    }
+
+    @Test
+    public void testLongDescription() {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream out = new PrintStream(outputStream);
+        String[] args = new String[]{"--help"};
+
+        new InfluxCli()
+                .setOut(out)
+                .setExitMechanism(status -> {
+                    if (status != 0) {
+                        throw new RuntimeException("Exit called with status " + status);
+                    }
+                })
+                .bindOrExit(LongDescriptionConfig.class, args);
+
+        String expected = "The following options are accepted: \n"
+                + "  -l, --lorem  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc\n"
+                + "               nec lacus eu lectus ultricies vehicula. Nullam faucibus nibh eu\n"
+                + "               neque gravida, ac cursus leo posuere. Nam imperdiet consequat\n"
+                + "               nisi, eu luctus sem hendrerit eget. Cras ornare sagittis\n"
+                + "               sagittis. Suspendisse at tellus tellus. Cras maximus efficitur\n"
+                + "               tincidunt. Nunc tristique hendrerit lorem porttitor vulputate.\n"
+                + "               Fusce condimentum dui eget justo interdum finibus. Vestibulum\n"
+                + "               tincidunt sit amet justo vitae pellentesque. Sed accumsan eu\n"
+                + "               nunc id mattis. In nec nisi venenatis ex porttitor sagittis eu\n"
+                + "               sed nisi.\n\n";
+
+        assertEquals(
+                expected,
+                outputStream.toString()
+        );
+    }
+
+    private static class LongDescriptionConfig {
+        @Arg(code = 'l', flag = "lorem", description = LOREM_IPSUM)
+        private String lorem;
+
+        public LongDescriptionConfig() {
+        }
     }
 
     private static class SimpleConfig implements Runnable {
