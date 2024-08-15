@@ -24,8 +24,7 @@
     </licenses>
 
     <description>
-        Influx CLI is a Java library which allows sophisticated command line interfaces to be constructed, with minimal
-        boilerplate, by using annotations to bind your command line interface to your data structure.
+        Bind command line arguments to java objects.
     </description>
 
     <properties>
