@@ -5,8 +5,8 @@ Influx CLI provides a flexible way to bind command line arguments to Java object
 * Library not a framework
 * No dependencies
 * Permissive licensing
-* Flexible
-* Easy to use
+* Versatility
+* Ease of use
 * Free
 
 ## Getting started
@@ -15,7 +15,7 @@ Influx CLI provides a flexible way to bind command line arguments to Java object
 <dependency>
     <groupId>org.voidzero</groupId>
     <artifactId>influx-cli</artifactId>
-    <version>0.11.0</version>
+    <version>0.13.0</version>
 </dependency>
 ```
 ### Example
